@@ -67,7 +67,7 @@ const PokemonSearch: React.FC = () => {
       {error && <p>{error}</p>}
 
       {searchResult && (
-        <Link href={`/pokemonlist/${searchResult.name}`} passHref>
+        <Link href={`/pokedex/${searchResult.name}`} passHref>
           <div className="flex flex-col p-4">
             <img
               src={

@@ -71,7 +71,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ pokemonData }) => {
               details?.map((detail, index) => (
                 <Link
                   key={index}
-                  href={`/pokemonlist/${
+                  href={`/pokedex/${
                     pokemonDetails[startItem + index].pokemon_species.name
                   }`}
                   className="flex flex-col justify-center items-center rounded-md text-red-800 bg-slate-200 h-full text-lg font-sans font-bold"

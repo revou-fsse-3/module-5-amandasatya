@@ -22,8 +22,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/auth/[token]",
-    "src/pages/pokemonlist/[pokemon]",
-    "src/pages/pokemonlist/[pokemon]"
+    "src/pages/pokedex/[pokemon]",
+    "src/pages/pokedex/[pokemon]"
   ],
   "exclude": ["node_modules"]
 }

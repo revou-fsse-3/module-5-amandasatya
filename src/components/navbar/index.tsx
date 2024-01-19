@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import pokemonLogo from "../../../public/images/pngegg.jpg";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +18,7 @@ const Navbar = () => {
       >
         <div className="flex items-center">
           <Image
-            src="/images/pngegg.png" // Update with the correct path
+            src="/images/pngegg.png"
             alt="Pokemon Logo"
             width={150}
             height={150}
@@ -80,24 +80,22 @@ const Navbar = () => {
           </button>
           <div className="flex justify-center items-center gap-2">
             <div className="flex justify-center items-center gap-2">
-              <a
-                href="#"
-                className="text-white py-2 hover:border-b-2 hover:border-red-500"
-              >
-                Home
-              </a>
+              <Link href={"/"}>
+                <div className="text-white py-2 hover:border-b-2 hover:border-red-500">
+                  Home
+                </div>
+              </Link>
               <a
                 href="#"
                 className="text-white py-2 hover:border-b-2 hover:border-red-500"
               >
                 Pokemon Battle
               </a>
-              <a
-                href="#"
-                className="text-white py-2 hover:border-b-2 hover:border-red-500"
-              >
-                Pokedex
-              </a>
+              <Link href={"/pokedex"}>
+                <div className="text-white py-2 hover:border-b-2 hover:border-red-500">
+                  Pokedex
+                </div>
+              </Link>
             </div>
             <div className="flex justify-center items-center gap-2">
               <a
