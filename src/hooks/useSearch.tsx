@@ -22,14 +22,14 @@ export const UseSearchPokemon = async (query: string) => {
         if (response.status === 404) {
           throw new Error("Pokemon Not Found");
         } else {
-          throw new Error("Failed to fetch Pokemon");
+          throw new Error("Pokemon Not Found");
         }
       }
       const result: PokemonDataDetail = await response.json();
       setSearchResult(result);
     } catch (error) {
       console.log(error);
-      setError("Failed to fetch Pokemon");
+      setError("Pokemon Not Found");
     } finally {
       setIsLoading(false);
     }

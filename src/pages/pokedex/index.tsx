@@ -98,7 +98,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ pokemonData }) => {
                     ))}
                   </div>
                   <button className="flex justify-center items-center text-center bg-slate-500 rounded-b-md w-full text-white p-2">
-                    Choose{" "}
+                    Catch{" "}
                     {pokemonDetails[startItem + index].pokemon_species.name}
                   </button>
                 </Link>

@@ -23,10 +23,10 @@ export default function Home() {
       </div>
       <div className="flex flex-col justify-center items-center m-10 pt-32  gap-5">
         <h1 className="flex justify-start text-white text-xl lg:text-6xl md:text-6xl lg:mx-10 font-sans font-extrabold mx-2">
-          Pokemon World RPS Online
+          Pokemon World RPS Game
         </h1>
         <h1 className="text-white text-wrap font-serif font-bold mx-10 lg:text-md">
-          The best rock papper scissor pokemon game
+          The best rock paper scissor pokemon game
         </h1>
         <button className="bg-red-500 rounded-lg w-24 p-2 mx-10 text-white">
           Play Now

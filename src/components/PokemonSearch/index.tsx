@@ -25,7 +25,7 @@ const PokemonSearch: React.FC = () => {
         if (response.status === 404) {
           throw new Error("Pokemon Not Found");
         } else {
-          throw new Error("Failed to fetch Pokemon");
+          throw new Error("Pokemon Not Found");
         }
       }
 
@@ -33,7 +33,7 @@ const PokemonSearch: React.FC = () => {
       setSearchResult(result);
     } catch (error) {
       console.error(error);
-      setError("Failed to fetch Pokemon");
+      setError("Pokemon Not Found");
     } finally {
       setIsLoading(false);
     }
