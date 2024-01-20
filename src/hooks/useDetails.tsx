@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import PokemonData from "@/components/types/pokemonData";
+
+export interface PokemonEntry {
+  pokemon_species: {
+    name: string;
+  };
+}
 
 export interface PokemonDataDetail {
   name: string;
@@ -27,27 +34,37 @@ export interface PokemonDataDetail {
   }>;
 }
 
-const usePokemonDetails = (pokemonEntries: any[]) => {
+const usePokemonDetails = (pokemonEntries: PokemonEntry[]) => {
   const [details, setDetails] = useState<PokemonDataDetail[]>([]);
+  const [prevPokemonEntries, setPrevPokemonEntries] = useState<PokemonEntry[]>(
+    []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
-      const detailsArray: PokemonDataDetail[] = [];
-      for (const data of pokemonEntries) {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${data.pokemon_species.name}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch details");
+      if (
+        JSON.stringify(pokemonEntries) !== JSON.stringify(prevPokemonEntries)
+      ) {
+        const detailsArray: PokemonDataDetail[] = [];
+        for (const data of pokemonEntries) {
+          const response = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${data.pokemon_species.name}`
+          );
+          if (!response.ok) {
+            console.error(
+              `Failed to fetch details for ${data.pokemon_species.name}`
+            );
+          }
+          const result: PokemonDataDetail = await response.json();
+          detailsArray.push(result);
         }
-        const result: PokemonDataDetail = await response.json();
-        detailsArray.push(result);
+        setDetails(detailsArray);
+        setPrevPokemonEntries(pokemonEntries);
       }
-      setDetails(detailsArray);
     };
 
     fetchData();
-  }, [pokemonEntries]);
+  }, [pokemonEntries, prevPokemonEntries]);
 
   return details;
 };
