@@ -98,6 +98,12 @@ const Navbar = () => {
               </Link>
             </div>
             <Link
+              href={"/register"}
+              className="text-white py-2 hover:border-b-2 hover:border-red-500"
+            >
+              Register
+            </Link>
+            <Link
               href={"/login"}
               className="text-white py-2 hover:border-b-2 hover:border-red-500"
             >
