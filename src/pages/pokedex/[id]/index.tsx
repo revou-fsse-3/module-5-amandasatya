@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { PokemonDataDetail } from "@/hooks/useDetails";
 import { Navbar } from "@/components";
 import Image from "next/image";
+
 export default function PokemonDetailPage() {
   const router = useRouter();
   const { pokemonname } = router.query;

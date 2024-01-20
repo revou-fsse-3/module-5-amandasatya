@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import useFetch from "@/hooks/useFetch";
+import React, { useState } from "react";
 import usePokemonDetails from "@/hooks/useDetails";
 import Link from "next/link";
 import PokemonListSearch from "../../components/PokemonSearch/index";
 import Image from "next/image";
 import { Navbar } from "@/components";
 import PokemonData from "@/components/types/pokemonData";
+import Head from "next/head";
 
 interface PokemonListProps {
   pokemonData: PokemonData;
@@ -52,6 +52,10 @@ const PokemonList: React.FC<PokemonListProps> = ({ pokemonData }) => {
 
   return (
     <>
+      <Head>
+        <title>pokedex</title>
+        <meta name="pokedex" content="pokedex" />
+      </Head>
       <Navbar />
       <div className="relative">
         <Image

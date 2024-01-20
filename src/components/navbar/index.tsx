@@ -85,32 +85,24 @@ const Navbar = () => {
                   Home
                 </div>
               </Link>
-              <a
-                href="#"
+              <Link
+                href={"/pokemonbattle"}
                 className="text-white py-2 hover:border-b-2 hover:border-red-500"
               >
                 Pokemon Battle
-              </a>
+              </Link>
               <Link href={"/pokedex"}>
                 <div className="text-white py-2 hover:border-b-2 hover:border-red-500">
                   Pokedex
                 </div>
               </Link>
             </div>
-            <div className="flex justify-center items-center gap-2">
-              <a
-                href="#"
-                className="text-white py-2 hover:border-b-2 hover:border-red-500"
-              >
-                Register
-              </a>
-              <a
-                href="#"
-                className="text-white py-2 hover:border-b-2 hover:border-red-500"
-              >
-                Log In
-              </a>
-            </div>
+            <Link
+              href={"/login"}
+              className="text-white py-2 hover:border-b-2 hover:border-red-500"
+            >
+              Log In
+            </Link>
           </div>
         </div>
       </div>
