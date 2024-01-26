@@ -1,9 +1,64 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+
+import supabase from "@/config/supabaseClient";
 import { Navbar } from "@/components";
+import { useEffect, useState } from "react";
+interface loginData {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
+  const [loginData, setLoginData] = useState<loginData | null>(null);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("storedEmail");
+    const storedPassword = localStorage.getItem("storedPassword");
+
+    if (storedEmail && storedPassword) {
+      setLoginData({ email: storedEmail, password: storedPassword });
+      setEmail(storedEmail);
+    }
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      let { data: login, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      console.log(login);
+      if (error) {
+        console.error("Supabase login error:", error);
+        setFetchError("Can't login");
+        return;
+      }
+
+      if (login) {
+        setLoginData({ email, password });
+        localStorage.setItem("storedEmail", email);
+        localStorage.setItem("storedPassword", password);
+
+        const session = login?.session;
+        if (session) {
+          const token = session.access_token;
+          if (token) {
+            localStorage.setItem("accessToken", token);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+      setFetchError("An error occurred during login");
+    }
+  };
+
   return (
     <>
       <Head>
@@ -29,7 +84,12 @@ const Login = () => {
                   Log in to your account
                 </h2>
               </div>
-              <form className="mt-8 space-y-6" action="#" method="POST">
+              <form
+                className="mt-8 space-y-6"
+                action="#"
+                method="POST"
+                onSubmit={handleLogin}
+              >
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm -space-y-px">
                   <div>
@@ -42,6 +102,8 @@ const Login = () => {
                       type="email"
                       autoComplete="email"
                       required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Email address"
                     />
@@ -56,6 +118,8 @@ const Login = () => {
                       type="password"
                       autoComplete="current-password"
                       required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Password"
                     />

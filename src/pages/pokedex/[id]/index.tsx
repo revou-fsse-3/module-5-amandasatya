@@ -6,14 +6,21 @@ import Image from "next/image";
 
 export default function PokemonDetailPage() {
   const router = useRouter();
-  const { pokemonname } = router.query;
+  const { pokemonDetail } = router.query;
+  console.log({ pokemonDetail }, "tesquery");
   const [pokemonData, setPokemonData] = useState<PokemonDataDetail | null>(
     null
   );
 
   useEffect(() => {
     const fetchData = async () => {
-      if (`${router.query.id}`) {
+      let apiUrl = "";
+      if (pokemonDetail) {
+        apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonDetail}`;
+      } else if (router.query.id) {
+        apiUrl = `https://pokeapi.co/api/v2/pokemon/${router.query.id}`;
+      }
+      if (apiUrl) {
         try {
           const response = await fetch(
             `https://pokeapi.co/api/v2/pokemon/${router.query.id}`
@@ -31,7 +38,7 @@ export default function PokemonDetailPage() {
     };
 
     fetchData();
-  }, [pokemonname]);
+  }, [pokemonDetail, router.query.id]);
 
   return (
     <>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Navbar } from "@/components";
 import PokemonData from "@/components/types/pokemonData";
 import Head from "next/head";
+import Button from "@/components/Button";
 
 interface PokemonListProps {
   pokemonData: PokemonData;
@@ -24,7 +25,6 @@ export async function getServerSideProps() {
 
 const PokemonList: React.FC<PokemonListProps> = ({ pokemonData }) => {
   const pokemonDetails = pokemonData.pokemon_entries;
-
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -71,8 +71,8 @@ const PokemonList: React.FC<PokemonListProps> = ({ pokemonData }) => {
           </h1>
           <PokemonListSearch />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12 mx-20 sm:mx-20 lg:mx-42 xl:mx-72 pt-10 ">
-            {details &&
-              details?.map((detail, index) => (
+            {details.details &&
+              details.details?.map((detail, index) => (
                 <Link
                   key={index}
                   href={`/pokedex/${
@@ -101,10 +101,10 @@ const PokemonList: React.FC<PokemonListProps> = ({ pokemonData }) => {
                       </span>
                     ))}
                   </div>
-                  <button className="flex justify-center items-center text-center bg-slate-500 rounded-b-md w-full text-white p-2">
+                  <Button className="flex justify-center items-center text-center bg-slate-500 rounded-b-md w-full text-white p-2">
                     Catch{" "}
                     {pokemonDetails[startItem + index].pokemon_species.name}
-                  </button>
+                  </Button>
                 </Link>
               ))}
           </div>

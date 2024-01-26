@@ -66,7 +66,7 @@ const usePokemonDetails = (pokemonEntries: PokemonEntry[]) => {
     fetchData();
   }, [pokemonEntries, prevPokemonEntries]);
 
-  return details;
+  return { details, setDetails };
 };
 
 export default usePokemonDetails;

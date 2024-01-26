@@ -15,24 +15,14 @@ const PokemonSearch: React.FC = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      setError(null);
-
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${searchQuery.toLowerCase()}`
       );
 
-      if (!response.ok) {
-        if (response.status === 404) {
-          throw new Error("Pokemon Not Found");
-        } else {
-          throw new Error("Pokemon Not Found");
-        }
-      }
-
       const result: PokemonDataDetail = await response.json();
       setSearchResult(result);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setError("Pokemon Not Found");
     } finally {
       setIsLoading(false);
